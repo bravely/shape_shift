@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure for your application as:
 #
-#     config :exshp_2_geo, key: :value
+#     config :shape_shift, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:exshp_2_geo, :key)
+#     Application.get_env(:shape_shift, :key)
 #
 # Or configure a 3rd-party app:
 #

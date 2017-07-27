@@ -1,8 +1,8 @@
-defmodule Exshp2Geo.Mixfile do
+defmodule ShapeShift.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :exshp_2_geo,
+    [app: :ShapeShift,
      version: "0.1.0",
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
@@ -28,6 +28,7 @@ defmodule Exshp2Geo.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [{:exshape, "~> 0.2.5"},
+     {:geo, "~> 1.5"}]
   end
 end

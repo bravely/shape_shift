@@ -2,7 +2,7 @@ defmodule ShapeShiftTest do
   use ExUnit.Case, async: true
   alias Exshape.Shp
 
-  doctest ShapeShift
+  doctest ShapeShift, except: [from_zip: 1]
 
   describe "to_geo" do
     test "converts an Exshape Point to a Geo.Point" do

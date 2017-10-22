@@ -5,19 +5,12 @@ defmodule ShapeShift do
   Converts Exshape structs to Geo structs.
 
   This allows for reading Shapefiles and immediately using
-  them with Geo, and in turn, Ecto.
+  them with Geo, and in turn, Ecto. In addition, the data
+  structures have been reformatted for ease of use.
   """
 
-  def shape_stream do
-    [{_name, _proj, stream}] = Exshape.from_zip("/Users/pepyri/Downloads/tl_2016_16_sldl.zip")
-    stream
-  end
-
   @doc """
-  Convert given Exshape shape to Geo Struct.
-
-  For shapes that contain other shapes or complex sets of
-  coordinates, uses recursion to simplify processing.
+  Convert given Exshape shape to its matching Geo Struct.
 
   ## Examples
       iex> ShapeShift.to_geo(%Exshape.Shp.Point{x: -113, y: 60})
@@ -47,7 +40,25 @@ defmodule ShapeShift do
     Enum.map(shapes, &to_geo(&1, inner: true))
   end
 
-  # Perhaps include BBox/Header info with shapes?
+  @doc """
+  Open a zip-compressed directory containing Shapefile, Proj4, and
+  DBF files, and convert each shape into a map containing geometry and
+  attribute information.
+
+  ## Examples
+    iex> [{name, proj, stream}] = ShapeShift.from_zip("test/fixtures/hoods.zip")
+    [{
+      "neighborhoods_orleans",
+      "GEOGCS[\"GCS_North_American_1983\",DATUM[\"D_North_American_1983\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+      #Function<24.4896 in Stream.transform/3>
+    }]
+    iex> Enum.to_list(stream) |> List.last()
+    %{attributes: %{"DIST" => "Algiers", "DIST_NUM" => "12", "HS_DIS" => "",
+    "LBL_SHRT" => "Whitney", "NBHD" => "Whitney", "NBHD_NUM" => 2,
+    "POLICE_DIS" => "0"},
+  geometry: %Geo.Polygon{coordinates: [[{-90.045872, 29.951904},
+     {-90.045772, 29.953104}, {-90.045672, 29.954203999999997}, {-90.244896, ...}, {...}, ...]]
+  """
   def from_zip(path) do
     path
     |> Exshape.from_zip()

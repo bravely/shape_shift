@@ -28,7 +28,11 @@ defmodule ShapeShift.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:exshape, "~> 0.2.5"},
-     {:geo, "~> 1.5"}]
+    [
+      {:exshape, "~> 0.2.5"},
+      {:geo, "~> 1.5"},
+      {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 0.5", only: [:dev], runtime: false}
+    ]
   end
 end

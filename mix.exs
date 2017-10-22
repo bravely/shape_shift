@@ -3,7 +3,7 @@ defmodule ShapeShift.Mixfile do
 
   def project do
     [app: :ShapeShift,
-     version: "0.1.1",
+     version: "0.1.2",
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -30,7 +30,7 @@ defmodule ShapeShift.Mixfile do
   defp deps do
     [
       {:exshape, "~> 2.0"},
-      {:geo, "~> 1.5"},
+      {:geo, "~> 2.0"},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false}
     ]
